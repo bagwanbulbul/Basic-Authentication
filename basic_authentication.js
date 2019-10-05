@@ -32,6 +32,21 @@ app.post("/post/sign-up",function (req,res){
         res.end();
 
 })
-app.get("/get/login/:email/:password")
+app.get("/get/login/:email/:password",function(req,res){
+    let email = req.params.email
+    let password = req.params.password
+    var data = fs.readFileSync("registration.json") 
+    var Data = JSON.parse(data);
+    for (index in Data){
+        if(Data[index].email===email && Data[index].password == password){
+            res.send("......successful.........")
+            
+        }
+        else{
+            res.send("oops!!!!! something went wrong")
+        }
+
+    }
+})
 app.listen(4000, () => console.log('server is listening 4000....'));
 
